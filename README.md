@@ -101,4 +101,5 @@ Notionなどのメモアプリ
   <li>Xシェア機能（gem meta-tags,mini_magick,）</li>
   <li>利用規約・プライバシーポリシー（gem 'high_voltage'）</li>
   <li>「今日の一問」AI自動作問機能（OpenAI API）</li>
+  <li>過去の自分に勝った！パーセンテージ表示機能（Chartkick）
 </ul>
