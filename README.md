@@ -81,7 +81,7 @@ Notionなどのメモアプリ
   <li>「今日の一問」手動作成機能（ユーザーが自分で問題を作成）</li>
   <li>画像アップロード機能（Active Storage + AWS S3）</li>
 </ul>
-　  
+
 【本リリース】
 <ul>
   <li>「今日の一問」AI自動作問機能</li>
@@ -103,3 +103,6 @@ Notionなどのメモアプリ
   <li>「今日の一問」AI自動作問機能（OpenAI API）</li>
   <li>過去の自分に勝った！パーセンテージ表示機能（Chartkick）
 </ul>
+
+## ■ 画面遷移図
+https://www.figma.com/design/E020i7jejLbLBX5zsJlKG4/Better-Than-Yesterday?node-id=0-1&t=HEx6TgI5jYq8eErI-1
