@@ -106,3 +106,6 @@ Notionなどのメモアプリ
 
 ## ■ 画面遷移図
 https://www.figma.com/design/E020i7jejLbLBX5zsJlKG4/Better-Than-Yesterday?node-id=0-1&t=HEx6TgI5jYq8eErI-1
+
+## ■ ER図
+[![Image from Gyazo](https://i.gyazo.com/06d03805616659da2c43ea31a4035d5c.png)](https://gyazo.com/06d03805616659da2c43ea31a4035d5c)
