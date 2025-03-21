@@ -1,0 +1,2 @@
+module DailyQuestionsHelper
+end
