@@ -1,0 +1,54 @@
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md my-6">
+<h1 class="text-2xl font-bold text-center mb-6">学びの振り返り詳細</h1>
+
+<!-- 投稿者情報とメタデータ -->
+<div class="flex justify-between items-center mb-4">
+  <div class="flex items-center">
+    <span class="font-semibold text-gray-800"><%= @post.user.username %></span>
+    <span class="text-sm text-gray-500 ml-2">さんの投稿</span>
+  </div>
+  <div class="text-sm text-gray-500">
+    <%= @post.learning_date %>
+  </div>
+</div>
+
+<!-- 投稿タイトルと内容 -->
+<div class="bg-blue-50 p-4 rounded-lg mb-6">
+  <h2 class="text-xl font-bold text-gray-800 mb-2"><%= @post.title %></h2>
+  <div class="whitespace-pre-wrap text-gray-700"><%= @post.body %></div>
+</div>
+
+<!-- 今日の一問 -->
+<div class="mt-8">
+  <h3 class="text-lg font-bold mb-2">今日の一問</h3>
+  
+  <div class="bg-gray-50 p-4 rounded-lg mb-4">
+    <div class="whitespace-pre-wrap mb-4"><%= @daily_question.body %></div>
+    
+    <div class="mt-4 p-3 bg-white border border-gray-200 rounded-md">
+      <p class="font-semibold">解答:</p>
+      <div class="whitespace-pre-wrap"><%= @daily_question.question_answer %></div>
+    </div>
+  </div>
+</div>
+
+<!-- アクションボタン -->
+<div class="mt-8 flex justify-between">
+  <a href="/posts" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700">戻る</a>
+  
+  <div>
+    <%= link_to '編集', edit_post_path(@post), class: "px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md mr-2" %>
+    <%= button_to '削除', post_path(@post), method: :delete, form: { data: { turbo_confirm: '本当に削除しますか？' } }, class: "px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md" %>
+  </div>
+</div>
+</div>
+
+
+
+
+<p><%= @post.user.username %></p>
+<p><%= @post.learning_date %></p>
+<p><%= @post.title %></p>
+<p><%= @post.body %></p>
+<p><%= @daily_question.body %></p>
+<p><%= @daily_question.question_answer %></p>

@@ -1,7 +1,7 @@
 ja:
   activerecord:
     models:
-      post: 投稿
+      post: 学びの振り返り
       profile: マイページ
       daily_question: 今日の一問
     attributes:

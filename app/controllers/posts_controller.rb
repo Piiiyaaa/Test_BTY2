@@ -20,6 +20,33 @@ class PostsController < ApplicationController
         end
     end
 
+    def show
+        @post = Post.find(params[:id])
+        @daily_question = @post.daily_question
+    end
+
+
+    def edit
+        @post = Post.find(params[:id])
+        @daily_question = @post.daily_question
+    end
+
+
+    def update
+        @post = Post.find(params[:id])
+        if @post.update(post_params)
+          redirect_to post_path(@post), notice: '投稿が更新されました。'
+        else
+          render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        @post = Post.find(params[:id])
+        @post.destroy
+        redirect_to posts_path, notice: '投稿が正常に削除されました', status: :see_other
+    end
+
     private
 
     def post_params
