@@ -7,7 +7,7 @@
     <%= form_with(model: @post, local: true, class: "space-y-4") do |f| %>
       <div>
         <%= f.label :learning_date, class: 'block text-sm font-medium text-gray-700' %>
-        <%= f.date_field :learning_date, class: 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500' %>
+        <%= f.date_field :learning_date, value: Date.today, class: 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500' %>
       </div>
       <div>
         <%= f.label :title, class: 'block text-sm font-medium text-gray-700' %>
