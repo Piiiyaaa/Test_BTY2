@@ -15,14 +15,16 @@
           </div>
         <% end %>
         
-        <div class="bg-white text-gray-800 font-bold py-6 px-4 rounded-lg border-2 border-[#90DAF9] flex flex-col items-center justify-center hover:bg-gray-50 transition h-full">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-          </svg>
-          <span>投稿をみる</span>
-        </div>
+        <%= link_to posts_path do %>
+          <div class="bg-white text-gray-800 font-bold py-6 px-4 rounded-lg border-2 border-[#90DAF9] flex flex-col items-center justify-center hover:bg-gray-50 transition h-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+            </svg>
+            <span>投稿をみる</span>
+          </div>
+        <% end %>
+
         <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo: false } %>
-      </div>
     </div>
   </div>
 </div>

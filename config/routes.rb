@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
+  resources :posts, only: %i[index new create]
+
   get "homes/top"
   root "home#top"
 
