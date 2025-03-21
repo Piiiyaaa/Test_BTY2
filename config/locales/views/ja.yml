@@ -1,9 +1,27 @@
 ja:
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      short: "%m/%d"
+      long: "%Y年%m月%d日(%a)"
+
   helpers:
     submit:
       create: 登録
       submit: 保存
       update: 更新
+      post:
+        create: 投稿する
+        update: 更新する
     label:
       email: メールアドレス
       password: パスワード
+ 
+  posts:
+    index:
+      title: 投稿一覧
+    new:
+      title: 学びの振り返り作成
+    create:
+      success: 学びの振り返りを作成しました！
+      failure: 投稿できませんでした

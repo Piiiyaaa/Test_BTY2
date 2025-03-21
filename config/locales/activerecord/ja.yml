@@ -1,21 +1,26 @@
 ja:
-  date:
-    formats:
-      default: "%Y/%m/%d"
-      short: "%m/%d"
-      long: "%Y年%m月%d日(%a)"
- 
-  posts:
-    index:
-      title: 投稿一覧
-    new:
-      title: 学びの振り返り作成
-      posting: 投稿する
-    create:
-      success: 学びの振り返り作成
-      failure: 投稿する
-
-  profiles:
-    edit:
-      username: ユーザー名
-      bio: 自己紹介
+  activerecord:
+    models:
+      post: 投稿
+      profile: マイページ
+      daily_question: 今日の一問
+    attributes:
+      post:
+        title: タイトル
+        body: 学習内容
+        learning_date: 学習日
+      profile:
+        username: ユーザー名
+        bio: 自己紹介
+  
+  errors:
+    template:
+      header: "%{count}個のエラーが発生しました"
+      body: 以下の項目を確認してください
+    messages:
+      blank: を入力してください
+      too_short: は%{count}文字以上で入力してください
+      too_long: は%{count}文字以内で入力してください
+      taken: はすでに使用されています
+      invalid: は不正な値です
+      not_a_number: は数値で入力してください
