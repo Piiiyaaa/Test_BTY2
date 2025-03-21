@@ -5,6 +5,17 @@ ja:
       short: "%m/%d"
       long: "%Y年%m月%d日(%a)"
  
-  common:
-    submit: "送信"
-    cancel: "キャンセル"
+  posts:
+    index:
+      title: 投稿一覧
+    new:
+      title: 学びの振り返り作成
+      posting: 投稿する
+    create:
+      success: 学びの振り返り作成
+      failure: 投稿する
+
+  profiles:
+    edit:
+      username: ユーザー名
+      bio: 自己紹介
