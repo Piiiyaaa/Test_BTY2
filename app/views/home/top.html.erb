@@ -21,6 +21,7 @@
           </svg>
           <span>投稿をみる</span>
         </div>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo: false } %>
       </div>
     </div>
   </div>
