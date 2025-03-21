@@ -2,7 +2,7 @@ class DailyQuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @daily_questions = DailyQuestion.includes(post: :user).order(created_at: :desc)
+    @daily_questions = current_user.posts.includes(:daily_question, :user).map(&:daily_question).compact
   end
 
   def show
