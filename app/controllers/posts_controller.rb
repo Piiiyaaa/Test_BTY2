@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
     def new
         @post = Post.new
+        @post.build_daily_question
     end
 
     def create
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-      params.require(:post).permit(:title, :body, :learning_date)
-    end
+        params.require(:post).permit(:title, :body, :learning_date,
+        daily_question_attributes: [:body, :question_answer])
+      end
 end

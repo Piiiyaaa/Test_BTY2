@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  get "daily_questions/show"
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
   resources :posts, only: %i[index new create]
+  resources :daily_questions, only: [ :index, :show ]
 
   get "homes/top"
   root "home#top"

@@ -9,6 +9,10 @@ ja:
         title: タイトル
         body: 学習内容
         learning_date: 学習日
+        daily_question: 今日の一問
+      daily_question:
+        body: 問題
+        question_answer: 解答
       profile:
         username: ユーザー名
         bio: 自己紹介

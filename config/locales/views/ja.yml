@@ -25,3 +25,7 @@ ja:
     create:
       success: 学びの振り返りを作成しました！
       failure: 投稿できませんでした
+
+  daily_question:
+    show: 
+      question:
