@@ -1,18 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
- 
- export default class extends Controller {
-   static targets = ["name", "output"]
- 
-   connect() {
-     this.element.textContent = "Hello World!"
-     console.log("Hello controller connected!")
-   }
- 
-   greet() {
-     this.outputTarget.textContent = `こんにちは、${this.nameTarget.value}さん!`
-   }
- }
-
 
 export default class extends Controller {
   static targets = ["name", "output"]
@@ -25,4 +11,3 @@ export default class extends Controller {
     this.outputTarget.textContent = `こんにちは、${this.nameTarget.value}さん!`
   }
 }
-
