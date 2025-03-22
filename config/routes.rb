@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "profiles/show"
+  get "profiles/edit"
+  get "profiles/update"
   get "daily_questions/show"
   devise_for :users, controllers: {
     registrations: "users/registrations",
