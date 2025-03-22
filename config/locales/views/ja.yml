@@ -24,7 +24,7 @@ ja:
       title: 学びの振り返り作成
     create:
       success: 学びの振り返りを作成しました！
-      failure: 投稿できませんでした
+      failure: 学びの振り返りを作成できませんでした
     edit:
       edit_post: 学びの振り返り編集画面
       update: 更新
@@ -38,7 +38,10 @@ ja:
     show: 
       question:
 
-  prpfiles:
+  profiles:
+    edit:
+      username: ユーザー名
+      bio: 自己紹介
     update:
       success: プロフィールが更新されました
       failure: プロフィールが更新できませんでした

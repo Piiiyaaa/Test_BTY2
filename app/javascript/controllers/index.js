@@ -3,7 +3,10 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
- 
+
+import CharacterCounterController from "./character_counter_controller"
+application.register("character-counter", CharacterCounterController)
+
 import HamburgerController from "./hamburger_controller"
 application.register("hamburger", HamburgerController)
 
