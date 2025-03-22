@@ -51,7 +51,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:title, :body, :learning_date,
+        params.require(:post).permit(:title, :body, :learning_date, :image, 
         daily_question_attributes: [ :body, :question_answer ])
       end
 end
