@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :authenticate_user!, except: [ :index ]
+    before_action :authenticate_user!, except: [ :show ]
 
     def index
         @posts = Post.includes(:user)
@@ -13,9 +13,9 @@ class PostsController < ApplicationController
     def create
         @post = current_user.posts.build(post_params)
         if @post.save
-            redirect_to posts_path, notice: t("posts.create.success")
+            redirect_to posts_path, notice: t('.success')
         else
-            flash.now[:alert] = t("posts.create.failure")
+            flash.now[:alert] = t('.failure')
             render :new, status: :unprocessable_entity
         end
     end
@@ -35,8 +35,9 @@ class PostsController < ApplicationController
     def update
         @post = Post.find(params[:id])
         if @post.update(post_params)
-          redirect_to post_path(@post), notice: "投稿が更新されました。"
+          redirect_to post_path(@post), notice: t('.success')
         else
+          flash.now[:alert] = t('posts.update.failure')
           render :edit, status: :unprocessable_entity
         end
     end
@@ -44,7 +45,7 @@ class PostsController < ApplicationController
     def destroy
         @post = Post.find(params[:id])
         @post.destroy
-        redirect_to posts_path, notice: "投稿が正常に削除されました", status: :see_other
+        redirect_to posts_path, notice: t('posts.destroy.success'), status: :see_other
     end
 
     private
