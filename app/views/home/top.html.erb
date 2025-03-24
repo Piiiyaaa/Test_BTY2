@@ -23,10 +23,6 @@
             <span>投稿をみる</span>
           </div>
         <% end %>
-        
-       <li><%= link_to '学びの記録一覧', posts_path %></li>
-        <li><%= link_to '今日の一問に挑戦', daily_questions_path %></li>
-        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo: false } %>
     </div>
   </div>
 </div>

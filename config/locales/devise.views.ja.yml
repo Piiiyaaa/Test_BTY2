@@ -107,6 +107,7 @@ ja:
         title: 新規登録
         sign_up: アカウント作成
         username: ユーザー名
+        to_sign_in: ログイン画面へ
 
       signed_up: アカウント作成が完了しました！
       signed_up_but_inactive: ログインするためには、アカウントを有効化してください。
@@ -120,6 +121,7 @@ ja:
       new:
         title: ログイン
         sign_in: ログイン
+        to_sign_up: 新規登録画面へ
       signed_in: ログインしました
       signed_out: ログアウトしました
     shared:
