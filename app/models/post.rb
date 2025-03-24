@@ -16,4 +16,10 @@ class Post < ApplicationRecord
       end
     end
 
+    def image_size
+      if image.attached? && image.blob.byte_size > 1.megabytes
+        errors.add(:image, '：1MB以下のファイルをアップロードしてください')
+      end
+    end
+
 end
