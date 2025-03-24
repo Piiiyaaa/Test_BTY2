@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   }
   resources :posts, only: %i[index new create show edit update destroy]
   resources :daily_questions, only: [ :index, :show ]
-  resource :profile, only: [:show, :edit, :update]
+  resource :profile, only: [ :show, :edit, :update ]
   # 他のユーザーのプロフィール
-  resources :profiles, only: [:show]
+  resources :profiles, only: [ :show ]
 
 
   get "homes/top"

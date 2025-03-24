@@ -9,17 +9,16 @@ class Post < ApplicationRecord
     validates :learning_date, presence: true
 
     private
-  
+
     def image_type_validation
-      if image.attached? && !image.content_type.in?(%w(image/jpeg image/png image))
-        errors.add(:image, 'はJPEG、PNGでアップロードしてください')
+      if image.attached? && !image.content_type.in?(%w[image/jpeg image/png image])
+        errors.add(:image, "はJPEG、PNGでアップロードしてください")
       end
     end
 
     def image_size
       if image.attached? && image.blob.byte_size > 1.megabytes
-        errors.add(:image, '：1MB以下のファイルをアップロードしてください')
+        errors.add(:image, "：1MB以下のファイルをアップロードしてください")
       end
     end
-
 end
