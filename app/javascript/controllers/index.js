@@ -15,3 +15,6 @@ application.register("hello", HelloController)
 
 import ImagePreviewController from "./image_preview_controller"
 application.register("image-preview", ImagePreviewController)
+
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
