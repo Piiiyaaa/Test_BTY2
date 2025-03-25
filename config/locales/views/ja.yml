@@ -19,7 +19,7 @@ ja:
  
   posts:
     index:
-      title: 投稿一覧
+      title: 学びの振り返り
     new:
       title: 学びの振り返り作成
     create:
@@ -36,11 +36,14 @@ ja:
 
   daily_questions:
     index:
-      title: 学びの振り返り作成
+      title: 今日の一問
     show: 
-      question:
+      question: 問題
+      question_answer: 解答
 
   profiles:
+    show: 
+      title: 自分の学びの振り返り
     edit:
       username: ユーザー名
       bio: 自己紹介
