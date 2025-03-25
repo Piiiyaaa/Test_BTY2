@@ -34,7 +34,9 @@ ja:
     destroy:
       success: 学びの振り返りが削除されました
 
-  daily_question:
+  daily_questions:
+    index:
+      title: 学びの振り返り作成
     show: 
       question:
 
