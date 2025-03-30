@@ -1,0 +1,41 @@
+<div class="max-w-2xl mx-auto my-8 px-4">
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center mb-4">
+      <div>
+        <p class="text-gray-700"><%= @daily_question.post.user.username %></p>
+        <p class="text-xs text-gray-500"><%= @daily_question.post.learning_date %></p>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-bold mb-4"><%= @daily_question.post.title %></h2>
+
+    <div class="flex space-x-4">
+      <%= link_to "この日の振り返りを見る", post_path(@daily_question.post), class: "px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-sm" %>
+    </div>
+    
+    <div class="mb-6">
+      <h3 class="text-lg font-semibold mb-2"><%= t('.question') %></h3>
+      <div class="p-4 bg-gray-50 rounded-md">
+        <p><%= @daily_question.body %></p>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <h3 class="text-lg font-semibold mb-2"><%= t('.question_answer') %></h3>
+      <textarea class="w-full p-3 border rounded-md" rows="4" placeholder="ここに解答を入力"></textarea>
+    </div>
+
+    <div data-controller="toggle">
+      <button data-action="click->toggle#toggle" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        解答を表示
+      </button>
+      <div data-toggle-target="content" class="hidden mt-4 p-4 bg-blue-50 rounded-md">
+        <p><%= @daily_question.question_answer %></p>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <%= link_to "一覧に戻る", daily_questions_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
+    </div>
+  </div>
+</div>
