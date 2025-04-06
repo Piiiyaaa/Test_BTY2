@@ -33,6 +33,12 @@ ja:
       failure: 学びの振り返りが更新できませんでした
     destroy:
       success: 学びの振り返りが削除されました
+    
+  likes:
+    create:
+      success: いいね!しました
+    destroy:
+      success: いいね!を外しました
 
   daily_questions:
     index:
