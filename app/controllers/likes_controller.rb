@@ -4,12 +4,12 @@ class LikesController < ApplicationController
 
   def create
     current_user.like(@post)
-    redirect_to @post, notice: t(".success")
+    redirect_to @post, notice: t('.success')
   end
 
   def destroy
     current_user.unlike(@post)
-    redirect_to @post, notice: t(".success")
+    redirect_to @post, notice: t('.success')
   end
 
   private
