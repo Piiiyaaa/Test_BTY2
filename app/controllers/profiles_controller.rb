@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [ :show ]
+  before_action :set_user, only: [:show]
 
   def show
     @user = params[:id] ? @user : current_user
@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to profile_path, notice: t("profiles.update.success")
+      redirect_to profile_path, notice: t('profiles.update.success')
     else
       render :edit, status: :unprocessable_entity
     end
