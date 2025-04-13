@@ -32,3 +32,7 @@ cat > .gitignore << 'EOL'
 
 # Ignore environment variables
 .env
+
+# Ignore bootsnap cache files
+/tmp/cache/bootsnap/**/*
+!/tmp/cache/bootsnap/.keep
