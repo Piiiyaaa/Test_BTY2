@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :profiles do
+    get "followers/index"
+    get "followings/index"
+  end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
@@ -11,6 +15,11 @@ Rails.application.routes.draw do
   resource :profile, only: %i[show edit update], controller: 'profiles'
   # 他のユーザーのプロフィール
   get 'profiles/:id', to: 'profiles#show', as: 'user_profile'
+  
+  resources :profiles, only: [], path: 'profiles' do
+    resources :followings, only: [:index], module: :profiles
+    resources :followers, only: [:index], module: :profiles
+  end
   
   resources :relationships, only: [:create, :destroy]
 

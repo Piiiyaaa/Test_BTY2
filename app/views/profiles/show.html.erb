@@ -4,7 +4,9 @@
       <h1 class="text-xl font-bold"><%= @user.username %></h1>
       <p class="text-gray-600 mt-2"><%= @user.bio %></p>
 
-      <% if current_user && current_user != @user %>
+      <%= render 'stats', user: @user %>
+
+      <% if current_user && current_user != @user %> #現在ログインしているユーザーと表示されているユーザーが異なる場合、という意味
       <div id="follow_form" class="mt-4">
         <% if current_user.following?(@user) %>
           <%= button_to "フォロー解除", relationship_path(followed_id: @user.id), 

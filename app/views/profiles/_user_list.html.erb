@@ -1,0 +1,33 @@
+<div class="grid gap-4">
+  <% if users.any? %>
+    <% users.each do |user| %>
+      <div class="border-b pb-4 flex justify-between items-center">
+        <div>
+          <%= link_to user.username, user_profile_path(user), class: "font-medium text-blue-600 hover:text-blue-800" %>
+          <% if user.bio.present? %>
+            <p class="text-gray-600 text-sm"><%= user.bio.truncate(100) %></p>
+          <% end %>
+        </div>
+        
+        <% if current_user && current_user != user %>
+          <div>
+            <% if current_user.following?(user) %>
+              <% relationship = current_user.active_relationships.find_by(followed_id: user.id) %>
+              <%= button_to "フォロー解除", relationship_path(relationship, followed_id: user.id), 
+                  method: :delete, 
+                  class: "bg-gray-500 hover:bg-gray-600 text-white py-1 px-4 rounded text-sm" %>
+            <% else %>
+              <%= button_to "フォローする", relationships_path(followed_id: user.id), 
+                  method: :post, 
+                  class: "bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded text-sm" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-gray-500 text-center py-4">
+      <%= type == 'following' ? 'フォローしているユーザー' : 'フォロワー' %>はいません
+    </p>
+  <% end %>
+</div>
