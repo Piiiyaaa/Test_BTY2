@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'likes/create'
-  get 'likes/destroy'
-  get 'profiles/show'
-  get 'profiles/edit'
-  get 'profiles/update'
-  get 'daily_questions/show'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
@@ -13,9 +7,12 @@ Rails.application.routes.draw do
     resource :like, only: %i[create destroy]
   end
   resources :daily_questions, only: %i[index show]
-  resource :profile, only: %i[show edit update]
+  # 自分のプロフィール
+  resource :profile, only: %i[show edit update], controller: 'profiles'
   # 他のユーザーのプロフィール
-  resources :profiles, only: [:show]
+  get 'profiles/:id', to: 'profiles#show', as: 'user_profile'
+  
+  resources :relationships, only: [:create, :destroy]
 
   get 'homes/top'
   root 'home#top'

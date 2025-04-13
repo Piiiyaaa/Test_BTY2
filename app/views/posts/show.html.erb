@@ -4,7 +4,7 @@
 <!-- 投稿者情報とメタデータ -->
 <div class="flex justify-between items-center mb-4">
   <div class="flex items-center">
-    <span class="font-semibold text-gray-800"><%= @post.user.username %></span>
+    <span class="font-semibold text-gray-800"><%= link_to @post.user.username, user_profile_path(@post.user), class: "hover:text-blue-600 hover:underline" %></span>
   </div>
   <div class="text-sm text-gray-500">
     <%= @post.learning_date %>
