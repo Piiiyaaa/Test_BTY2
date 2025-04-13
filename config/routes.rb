@@ -13,9 +13,10 @@ Rails.application.routes.draw do
     resource :like, only: %i[create destroy]
   end
   resources :daily_questions, only: %i[index show]
-  resource :profile, only: %i[show edit update]
+  # 自分のプロフィール
+  resource :profile, only: %i[show edit update], controller: 'profiles'
   # 他のユーザーのプロフィール
-  resources :profiles, only: [:show]
+  get 'profiles/:id', to: 'profiles#show', as: 'user_profile'
 
   get 'homes/top'
   root 'home#top'
