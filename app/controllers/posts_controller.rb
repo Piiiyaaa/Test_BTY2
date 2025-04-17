@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: %i[show edit update destroy]
   before_action :check_post_owner, only: %i[edit update destroy]
 
   def index
-    @posts = Post.includes(:user)
+    @posts = Post.includes(:user, :tags)
+    @tags = Tag.all.order(name: :asc) 
   end
 
   def new
@@ -14,7 +15,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if @post.save
+    tag_list = params[:post][:tag_names].split(',').map(&:strip) if params[:post][:tag_names].present?
+    
+    if @post.save && @post.save_with_tags(tag_names: tag_list || [])
       redirect_to posts_path, notice: t('.success')
     else
       flash.now[:alert] = t('.failure')
@@ -31,7 +34,9 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
+    tag_list = params[:post][:tag_names].split(',').map(&:strip) if params[:post][:tag_names].present?
+    
+    if @post.update(post_params) && @post.save_with_tags(tag_names: tag_list || [])
       redirect_to post_path(@post), notice: t('.success')
     else
       flash.now[:alert] = t('posts.update.failure')
