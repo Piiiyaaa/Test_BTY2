@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resource :like, only: %i[create destroy]
   end
   resources :daily_questions, only: %i[index show]
+  resources :tags, only: [:index, :show]
+  
   # 自分のプロフィール
   resource :profile, only: %i[show edit update], controller: 'profiles'
   # 他のユーザーのプロフィール
