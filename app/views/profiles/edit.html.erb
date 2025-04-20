@@ -14,34 +14,57 @@
         </div>
       <% end %>
       
-      <div class="mb-4" data-controller="character-counter">
-        <%= f.label :username, t('.username'), class: 'block text-gray-700 font-medium mb-2' %>
-        <%= f.text_field :username, 
-              class: 'w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500', 
-              maxlength: 10,
-              data: { 
-                character_counter_target: "field",
-                action: "input->character-counter#updateCounter"
-              } 
-        %>
-        <div class="text-right text-xs text-gray-500 mt-1">
-          <span data-character-counter-target="counter"><%= @user.username ? @user.username.length : 0 %></span>/10字
+      <div class="mb-6">
+        <%= f.label :avatar, "プロフィール画像", class: "block text-gray-700 font-medium mb-2" %>
+        
+        <div class="flex items-center space-x-4 mb-4">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, id: "avatar-preview", class: "w-24 h-24 rounded-full object-cover border border-gray-300" %>
+          <% else %>
+            <div id="avatar-preview" class="w-24 h-24 rounded-full border border-gray-300 flex items-center justify-center bg-gray-100 hidden">
+              <span class="text-gray-400 text-xs">No image</span>
+            </div>
+          <% end %>
+          <p class="text-sm text-gray-600" id="preview-text">
+            <% if current_user.avatar.attached? %>
+              現在の画像
+            <% end %>
+          </p>
+        </div>
+        
+        <div class="custom-file-upload">
+          <label class="cursor-pointer inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow">
+            画像を選択
+            <%= f.file_field :avatar, 
+                           id: "avatar-input",
+                           accept: 'image/png,image/jpeg,image/gif', 
+                           class: "hidden" %>
+          </label>
+          <span class="ml-2 text-sm text-gray-600" id="filename-display"></span>
+          <p class="text-xs text-gray-500 mt-2">※ 対応形式：JPEG / PNG / GIF</p>
         </div>
       </div>
       
-      <div class="mb-6" data-controller="character-counter">
-        <%= f.label :bio, t('.bio'), class: 'block text-gray-700 font-medium mb-2' %>
+      <div class="mb-4">
+        <%= f.label :username, "ユーザー名", class: 'block text-gray-700 font-medium mb-2' %>
+        <%= f.text_field :username, 
+              class: 'w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500', 
+              maxlength: 10
+        %>
+        <div class="text-right text-xs text-gray-500 mt-1">
+          <span id="username-counter"><%= @user.username ? @user.username.length : 0 %></span>/10字
+        </div>
+      </div>
+      
+      <div class="mb-6">
+        <%= f.label :bio, "自己紹介", class: 'block text-gray-700 font-medium mb-2' %>
         <%= f.text_area :bio, 
               rows: 5, 
               class: 'w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500', 
-              maxlength: 200,
-              data: { 
-                character_counter_target: "field",
-                action: "input->character-counter#updateCounter"
-              } 
+              maxlength: 200
         %>
         <div class="text-right text-xs text-gray-500 mt-1">
-          <span data-character-counter-target="counter"><%= @user.bio ? @user.bio.length : 0 %></span>/200字
+          <span id="bio-counter"><%= @user.bio ? @user.bio.length : 0 %></span>/200字
         </div>
       </div>
       
@@ -51,3 +74,77 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  // イベントリスナーを設定する関数
+  function setupAvatarPreview() {
+    console.log('プレビュー機能をセットアップしています...');
+    
+    const avatarInput = document.getElementById('avatar-input');
+    const avatarPreview = document.getElementById('avatar-preview');
+    const previewText = document.getElementById('preview-text');
+    const filenameDisplay = document.getElementById('filename-display');
+    
+    if (!avatarInput) {
+      console.log('avatar-input要素が見つかりません');
+      return;
+    }
+    
+    console.log('avatar-input要素が見つかりました');
+    
+    // イベントリスナーをクリアして再設定（重複防止）
+    avatarInput.removeEventListener('change', handleFileChange);
+    avatarInput.addEventListener('change', handleFileChange);
+    
+    function handleFileChange() {
+      console.log('ファイル選択イベント発生');
+      if (this.files && this.files[0]) {
+        // ファイル名を表示
+        if (filenameDisplay) {
+          filenameDisplay.textContent = this.files[0].name;
+        }
+        
+        // プレビュー画像を表示
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          if (avatarPreview) {
+            if (avatarPreview.tagName.toLowerCase() === 'img') {
+              avatarPreview.src = e.target.result;
+            } else {
+              // divの場合は、中身を画像に置き換える
+              avatarPreview.innerHTML = '';
+              const img = document.createElement('img');
+              img.src = e.target.result;
+              img.className = 'w-full h-full object-cover rounded-full';
+              avatarPreview.appendChild(img);
+            }
+            avatarPreview.classList.remove('hidden');
+          }
+          
+          if (previewText) {
+            previewText.textContent = '新しい画像（プレビュー）';
+          }
+        };
+        
+        reader.readAsDataURL(this.files[0]);
+      }
+    }
+  }
+
+  // Turbo/Turbolinksのイベント
+  if (typeof Turbo !== 'undefined') {
+    // Rails 7 with Turbo
+    document.addEventListener('turbo:load', setupAvatarPreview);
+    document.addEventListener('turbo:render', setupAvatarPreview);
+  } else if (typeof Turbolinks !== 'undefined') {
+    // Rails 6 with Turbolinks
+    document.addEventListener('turbolinks:load', setupAvatarPreview);
+  }
+  
+  // 標準のイベント（フォールバック）
+  document.addEventListener('DOMContentLoaded', setupAvatarPreview);
+  
+  // 直接実行も追加（特にスクリプトが後から読み込まれた場合のため）
+  setupAvatarPreview();
+</script>
