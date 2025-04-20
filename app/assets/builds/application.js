@@ -8576,19 +8576,47 @@ var hello_controller_default = class extends Controller {
 
 // app/javascript/controllers/image_preview_controller.js
 var image_preview_controller_default = class extends Controller {
-  static targets = ["input", "preview"];
+  static targets = ["input", "preview", "previewText", "filename"];
+  connect() {
+    console.log("Image preview controller connected!");
+  }
   previewImage() {
     const input = this.inputTarget;
-    const preview = this.previewTarget;
+    const preview = this.hasPreviewTarget ? this.previewTarget : null;
+    const previewText = this.hasPreviewTextTarget ? this.previewTextTarget : null;
+    const filename = this.hasFilenameTarget ? this.filenameTarget : null;
     if (!input.files || !input.files[0]) return;
     const file = input.files[0];
+    if (filename) {
+      filename.textContent = file.name;
+    }
     if (!file.type.startsWith("image/")) {
-      preview.innerHTML = '<p class="text-red-500">\u6709\u52B9\u306A\u753B\u50CF\u30D5\u30A1\u30A4\u30EB\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002</p>';
+      if (preview) {
+        preview.innerHTML = '<p class="text-red-500">\u6709\u52B9\u306A\u753B\u50CF\u30D5\u30A1\u30A4\u30EB\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002</p>';
+      }
       return;
     }
     const reader = new FileReader();
     reader.onload = (e) => {
-      preview.innerHTML = `<img src="${e.target.result}" alt="Preview" class="mt-1 rounded" style="max-width: 300px; max-height: 200px;">`;
+      if (preview) {
+        if (preview.tagName.toLowerCase() === "img") {
+          preview.src = e.target.result;
+        } else {
+          if (preview.classList.contains("rounded-full")) {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.className = "w-full h-full object-cover rounded-full";
+            preview.innerHTML = "";
+            preview.appendChild(img);
+          } else {
+            preview.innerHTML = `<img src="${e.target.result}" alt="Preview" class="mt-1 rounded" style="max-width: 300px; max-height: 200px;">`;
+          }
+        }
+        preview.classList.remove("hidden");
+      }
+      if (previewText) {
+        previewText.textContent = "\u65B0\u3057\u3044\u753B\u50CF\uFF08\u30D7\u30EC\u30D3\u30E5\u30FC\uFF09";
+      }
     };
     reader.readAsDataURL(file);
   }
