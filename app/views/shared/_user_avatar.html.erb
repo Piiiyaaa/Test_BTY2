@@ -1,0 +1,33 @@
+<%# app/views/shared/_user_avatar.html.erb %>
+<% 
+  # デフォルト値の設定
+  size ||= 40
+  classes ||= ""
+  show_name ||= false
+%>
+
+<div class="flex items-center <%= 'space-x-2' if show_name %>">
+  <% if user.avatar.attached? %>
+    <%= image_tag user.avatar, 
+                class: "rounded-full object-cover border border-gray-200 #{classes}", 
+                style: "width: #{size}px; height: #{size}px;" %>
+    <% else %>
+        <div class="flex items-center justify-center bg-gray-200 text-gray-500 rounded-full <%= classes %>"
+            style="width: <%= size %>px; height: <%= size %>px;">
+            <% icon_size_class = case size
+                            when 0..20 then 'text-xs'
+                            when 21..30 then 'text-sm'
+                            when 31..40 then 'text-base'
+                            when 41..60 then 'text-lg'
+                            when 61..80 then 'text-xl'
+                            when 81..100 then 'text-2xl'
+                            else 'text-3xl'
+                            end %>
+            <i class="fa-solid fa-user <%= icon_size_class %>"></i>
+        </div>
+    <% end %>
+  
+  <% if show_name && user.username.present? %>
+    <span class="font-medium text-gray-800"><%= user.username %></span>
+  <% end %>
+</div>
