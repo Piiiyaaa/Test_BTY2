@@ -14,15 +14,52 @@
         </div>
       <% end %>
       
+      <div class="mb-6" data-controller="image-preview">
+        <%= f.label :avatar, "プロフィール画像", class: "block text-gray-700 font-medium mb-2" %>
+        
+        <div class="flex items-center space-x-4 mb-4">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, 
+                      data: { image_preview_target: "preview" }, 
+                      class: "w-24 h-24 rounded-full object-cover border border-gray-300" %>
+          <% else %>
+            <div data-image-preview-target="preview" 
+                class="w-24 h-24 rounded-full border border-gray-300 flex items-center justify-center bg-gray-100 hidden">
+              <span class="text-gray-400 text-xs">No image</span>
+            </div>
+          <% end %>
+          <p class="text-sm text-gray-600" data-image-preview-target="previewText">
+            <% if current_user.avatar.attached? %>
+              現在の画像
+            <% end %>
+          </p>
+        </div>
+        
+        <div class="custom-file-upload">
+          <label class="cursor-pointer inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow">
+            画像を選択
+            <%= f.file_field :avatar, 
+                          accept: 'image/png,image/jpeg,image/gif', 
+                          class: "hidden",
+                          data: { 
+                            image_preview_target: "input",
+                            action: "change->image-preview#previewImage" 
+                          } %>
+          </label>
+          <span class="ml-2 text-sm text-gray-600" data-image-preview-target="filename"></span>
+          <p class="text-xs text-gray-500 mt-2">※ 対応形式：JPEG / PNG / GIF</p>
+        </div>
+      </div>
+      
       <div class="mb-4" data-controller="character-counter">
-        <%= f.label :username, t('.username'), class: 'block text-gray-700 font-medium mb-2' %>
+        <%= f.label :username, "ユーザー名", class: 'block text-gray-700 font-medium mb-2' %>
         <%= f.text_field :username, 
               class: 'w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500', 
               maxlength: 10,
               data: { 
                 character_counter_target: "field",
                 action: "input->character-counter#updateCounter"
-              } 
+              }  
         %>
         <div class="text-right text-xs text-gray-500 mt-1">
           <span data-character-counter-target="counter"><%= @user.username ? @user.username.length : 0 %></span>/10字
@@ -30,7 +67,7 @@
       </div>
       
       <div class="mb-6" data-controller="character-counter">
-        <%= f.label :bio, t('.bio'), class: 'block text-gray-700 font-medium mb-2' %>
+        <%= f.label :bio, "自己紹介", class: 'block text-gray-700 font-medium mb-2' %>
         <%= f.text_area :bio, 
               rows: 5, 
               class: 'w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500', 

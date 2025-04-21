@@ -2,6 +2,7 @@
   <div class="bg-white rounded-lg shadow p-6 mb-6">
     <div class="flex flex-col items-center">
       <h1 class="text-xl font-bold"><%= @user.username %></h1>
+      <%= render 'shared/user_avatar', user: @user, size: 100, classes: "border-2 border-blue-500" %>
       <p class="text-gray-600 mt-2"><%= @user.bio %></p>
 
       <%= render 'stats', user: @user %>
@@ -33,9 +34,9 @@
       <% @posts.each do |post| %>
         <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-150 ease-in-out">
           <div class="flex items-center mb-4">
-            <div class="text-gray-500">
+            <%= render 'shared/user_avatar', user: post.user, size: 40, show_name: false %>
+            <div class="ml-3 text-gray-500">
               <%= post.user.username %>
-              <span class="mx-2">•</span>
               <%= l(post.created_at.to_date, format: :short) %>
             </div>
           </div>

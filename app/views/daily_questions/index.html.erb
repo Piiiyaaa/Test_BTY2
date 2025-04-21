@@ -6,8 +6,11 @@
       <div class="bg-white rounded-lg shadow-md p-6">
         <div class="flex items-center mb-4">
           <div class="text-gray-500 mr-4">
-            <%= question.post.user.username %>
-            <%= l(question.post.created_at.to_date, format: :short) %>
+            <%= render 'shared/user_avatar', user: question.post.user, size: 40, show_name: false %>
+              <div class="ml-3 text-gray-500">
+                <%= question.post.user.username %>
+                <%= l(question.post.created_at.to_date, format: :short) %>
+              </div>
           </div>
         </div>
 
