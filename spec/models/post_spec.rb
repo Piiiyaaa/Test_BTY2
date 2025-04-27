@@ -37,6 +37,17 @@ RSpec.describe Post, type: :model do
             expect(post_without_learning_date.errors[:learning_date]).not_to be_empty
         end
 
+        it 'userとの関連付けが正しく機能しているか' do
+            post = create(:post)
+            expect(post.user).to be_present
+          end
+      
+          it 'daily_questionとの関連付けが正しく機能しているか' do
+            daily_question = create(:daily_question)
+            post = daily_question.post
+            expect(post.daily_question).to eq(daily_question)
+          end
+          
         it '不正な形式の画像ファイルはinvalidになるか' do
             post = build(:post)
             file = StringIO.new("dummy text file")

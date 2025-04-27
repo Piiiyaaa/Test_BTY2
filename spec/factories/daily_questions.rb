@@ -1,7 +1,7 @@
 FactoryBot.define do
     factory :daily_question do
-      content { "今日の振り返り質問内容" }
-      answer { "質問に対する回答" }
+      body { "これはテスト投稿の本文です。学習内容を記録するためのサンプルテキストです。" }
+      question_answer { "これはテスト投稿の解答です。解答を記録するためのサンプルテキストです。" }
       association :post
     end
   end

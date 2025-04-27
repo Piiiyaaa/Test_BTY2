@@ -12,6 +12,8 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 20 }
   validates :body, presence: true, length: { maximum: 400 }
   validates :learning_date, presence: true
+  validate :image_type_validation
+  validate :image_size
 
   scope :with_tag, ->(tag_name) { joins(:tags).where(tags: { name: tag_name }) }
 
