@@ -47,7 +47,7 @@ RSpec.describe Post, type: :model do
             post = daily_question.post
             expect(post.daily_question).to eq(daily_question)
           end
-          
+
         it '不正な形式の画像ファイルはinvalidになるか' do
             post = build(:post)
             file = StringIO.new("dummy text file")
@@ -62,6 +62,27 @@ RSpec.describe Post, type: :model do
             post.image.attach(io: large_file, filename: 'large.jpg', content_type: 'image/jpeg')
             expect(post).to be_invalid
             expect(post.errors[:image]).not_to be_empty
+        end
+
+        it '新しいタグを保存できるか' do
+            post = build(:post)
+            result = post.save_with_tags(tag_names: ['Ruby', 'Rails'])
+            
+            expect(result).to be true
+            expect(post.tags.count).to eq 2
+            expect(post.tags.pluck(:name)).to contain_exactly('Ruby', 'Rails')
+        end
+
+        it 'タグを複数持つことができるか' do
+            post = create(:post)
+            tag1 = create(:tag, name: 'Ruby')
+            tag2 = create(:tag, name: 'Rails')
+            
+            post.tags << tag1
+            post.tags << tag2
+            
+            expect(post.tags.count).to eq(2)
+            expect(post.tags).to include(tag1, tag2)
           end
 
     end

@@ -33,9 +33,19 @@ RSpec.describe User, type: :model do
         end
     end
 
-    describe 'バリデーションチェック' do
-        it do
-
+    describe 'アソシエーション' do
+        it 'postsとの関連付けが正しく設定されているか' do
+            association = User.reflect_on_association(:posts)
+            expect(association.macro).to eq :has_many
         end
+    end
+
+    describe 'destroyの挙動' do
+        it 'Userを削除した場合に関連するPostも削除される' do
+            user = create(:user)
+            create(:post, user: user)
+            expect { user.destroy }.to change(Post, :count).by(-1)
+        end
+    end
 
 end

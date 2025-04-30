@@ -50,6 +50,7 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'webdrivers'
   
   # テスト用に追加
   gem 'shoulda-matchers'
