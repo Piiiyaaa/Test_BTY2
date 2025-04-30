@@ -36,3 +36,6 @@ cat > .gitignore << 'EOL'
 # Ignore bootsnap cache files
 /tmp/cache/bootsnap/**/*
 !/tmp/cache/bootsnap/.keep
+
+.DS_Store
+**/.DS_Store
