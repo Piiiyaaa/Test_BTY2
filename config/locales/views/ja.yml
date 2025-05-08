@@ -26,7 +26,7 @@ ja:
       success: 学びの振り返りを作成しました！
       failure: 学びの振り返りを作成できませんでした
     edit:
-      edit_post: 学びの振り返り編集画面
+      title: 学びの振り返り編集画面
       update: 更新
     update:
       success: 学びの振り返りが更新されました
